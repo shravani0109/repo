@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noted. - Your Digital Productivity Companion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+        :root {
+            --primary-color: #3a7bd5;
+            --secondary-color: #00d2ff;
+            --accent-color: #ff6b6b;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .cta-button {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.4s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 100px 0;
+        }
+
+
+        .feature {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+
+        .feature:hover::before {
+            opacity: 1;
+        }
+
+
+        .feature h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+
+        .feature p {
+            position: relative;
+        }
+
+
+        .signup-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            max-width: 400px;
+            margin: 80px auto;
+            transition: all 0.3s ease;
+        }
+
+
+        .signup-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .signup-form h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+
+        .submit-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+
+        .submit-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 80px;
+        }
+
+
+        .about-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f6f9fc 0%, #f1f5f9 100%);
+        }
+
+
+        .section-title {
+            font-size: 36px;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 20px auto 0;
+        }
+
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+
+        .about-content > div {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        .about-content > div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .about-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+
+        .about-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+
+        .team-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+
+        .team-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+
+
+        .team-list li:last-child {
+            border-bottom: none;
+        }
+
+
+        .team-list li:hover {
+            transform: translateX(10px);
+            color: var(--primary-color);
+        }
+
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+
+            .hero {
+                padding: 120px 0 80px;
+            }
+
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+
+            .hero p {
+                font-size: 18px;
+            }
+
+
+            .features {
+                padding: 60px 0;
+            }
+
+
+            .about-section {
+                padding: 60px 0;
+            }
+
+
+            .section-title {
+                font-size: 28px;
+            }
+
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Noted.</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#signup">Sign Up</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Your Digital Productivity Companion</h1>
+                <p>Streamline your workflow, capture ideas, and collaborate effortlessly with Noted.</p>
+                <a href="#signup" class="cta-button">Start Noting</a>
+            </div>
+        </section>
+
+        <section id="features" class="features container">
+            <div class="feature">
+                <h3>Smart Note-Taking</h3>
+                <p>Capture and organize your thoughts with our intelligent note-taking system.</p>
+            </div>
+            <div class="feature">
+                <h3>Task Management</h3>
+                <p>Turn your notes into actionable tasks and track your progress effortlessly.</p>
+            </div>
+            <div class="feature">
+                <h3>Seamless Collaboration</h3>
+                <p>Share notes and tasks with your team for enhanced productivity.</p>
+            </div>
+        </section>
+
+        <section id="signup" class="signup-form">
+            <h2>Join Noted. Today</h2>
+            <form id="signup-form" action="/signup" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="submit-button">Get Started</button>
+            </form>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About Noted.</h2>
+                <div class="about-content">
+                    <div class="mission-statement">
+                        <h3>Our Mission</h3>
+                        <p>At Noted., we're on a mission to revolutionize the way you organize tasks and boost your productivity. We believe that managing your daily life shouldn't be complex – it should be intuitive, effortless, and even enjoyable.</p>
+                    </div>
+                    <div class="unique-approach">
+                        <h3>Our Approach</h3>
+                        <p>What sets us apart? Simplicity. We've stripped away the unnecessary complexities often found in productivity tools, leaving you with a sleek, powerful system that helps you get things done without getting in your way.</p>
+                    </div>
+                    <div class="team-section">
+                        <h3>Meet the Innovators</h3>
+                        <p>Noted. is the brainchild of three visionaries who are passionate about making your life easier:</p>
+                        <ul class="team-list">
+                            <li>Shreya Kalambe</li>
+                            <li>Shravani Katre</li>
+                            <li>Shubhika Maheshwari</li>
+                        </ul>
+                        <p>Together, they've combined their expertise in technology, design, and productivity to create a tool that's changing the game in personal and professional organization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+        <style>
+        .about-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f6f9fc 0%, #f1f5f9 100%);
+        }
+       
+        .section-title {
+            font-size: 36px;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+       
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 20px auto 0;
+        }
+       
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+       
+        .about-content > div {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+       
+        .about-content > div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+       
+        .about-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+       
+        .about-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+       
+        .team-list {
+            list-style-type: none;
+            padding: 0;
+        }
+       
+        .team-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+       
+        .team-list li:last-child {
+            border-bottom: none;
+        }
+       
+        .team-list li:hover {
+            transform: translateX(10px);
+            color: var(--primary-color);
+        }
+       
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 60px 0;
+            }
+       
+            .section-title {
+                font-size: 28px;
+            }
+       
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        </style>
+    </main>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Noted. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('signup-form');
+            const header = document.querySelector('header');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('main > section');
+
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
